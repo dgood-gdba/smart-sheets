@@ -1,12 +1,11 @@
 {
-    "name": "gdba/smart-sheets",
+    "name": "dgood-gdba/smart-sheets",
     "description": "PHP integration to SmartSheetsAPI",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "David Good",
-            "email": "dgood@gdba.com"
         }
     ],
     "require": {
@@ -16,16 +15,16 @@
     },
     "autoload": {
         "psr-4": {
-            "GDBA\\SmartSheets\\": "src"
+            "DgoodGdba\\SmartSheets\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "GDBA\\SmartSheets\\SmartSheetsServiceProvider"
+                "DgoodGdba\\SmartSheets\\SmartSheetsServiceProvider"
             ],
             "aliases": {
-                "SmartSheets": "GDBA\\SmartSheets\\Facades\\SmartSheets"
+                "SmartSheets": "DgoodGdba\\SmartSheets\\Facades\\SmartSheets"
             }
         }
     },

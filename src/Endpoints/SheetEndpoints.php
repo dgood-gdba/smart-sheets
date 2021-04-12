@@ -1,6 +1,6 @@
 <?php
 
-namespace GDBA\SmartSheets\Endpoints;
+namespace DgoodGdba\SmartSheets\Endpoints;
 
 use Carbon\Carbon;
 

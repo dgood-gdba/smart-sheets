@@ -1,10 +1,10 @@
 <?php
 
-namespace GDBA\SmartSheets;
+namespace DgoodGdba\SmartSheets;
 
-use GDBA\SmartSheets\Endpoints\EventEndpoints;
-use GDBA\SmartSheets\Endpoints\SheetEndpoints;
-use GDBA\SmartSheets\Endpoints\UserEndpoints;
+use DgoodGdba\SmartSheets\Endpoints\EventEndpoints;
+use DgoodGdba\SmartSheets\Endpoints\SheetEndpoints;
+use DgoodGdba\SmartSheets\Endpoints\UserEndpoints;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Str;
 

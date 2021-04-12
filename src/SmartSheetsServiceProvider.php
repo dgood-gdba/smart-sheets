@@ -1,6 +1,6 @@
 <?php
 
-namespace GDBA\SmartSheets;
+namespace DgoodGdba\SmartSheets;
 
 use Illuminate\Support\ServiceProvider;
 

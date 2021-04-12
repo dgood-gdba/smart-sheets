@@ -1,6 +1,6 @@
 <?php
 
-namespace GDBA\SmartSheets\Facades;
+namespace DgoodGdba\SmartSheets\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
