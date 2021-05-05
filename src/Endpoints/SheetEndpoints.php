@@ -103,6 +103,7 @@ trait SheetEndpoints
 
         try {
             $results = json_decode($this->client()->get($url)->getBody()->getContents());
+            dd($results);
             return $this->respond(200, 'Success.', [
                 'version' => $results->version,
             ]);
