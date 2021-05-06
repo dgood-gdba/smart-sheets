@@ -332,7 +332,13 @@ trait SheetEndpoints
         }
     }
     
-    public function addRow(string $sheet_id, array $data, bool $toTop = true)
+    /**
+     * @param string $sheet_id
+     * @param array $data
+     * @param bool $toTop
+     * @return array
+     */
+    public function addRow(string $sheet_id, array $data, bool $toTop = true): array
     {
         $params = [
             'toTop' => $toTop,
