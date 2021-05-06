@@ -332,5 +332,19 @@ trait SheetEndpoints
         }
     }
     
-    
+    public function addRow(string $sheet_id, array $data, bool $toTop = true)
+    {
+        $params = [
+            'toTop' => $toTop,
+            'cells' => $data
+        ];
+        $url = $this->url . self::SHEETS . "$sheet_id/rows";
+        $results = $this->client()->request('post', $url, [
+            'json' => $params
+        ]);
+        dd($results);
+        return $this->respond(200, 'Success.', [
+            'results' => $results->results,
+        ]);
+    }
 }
