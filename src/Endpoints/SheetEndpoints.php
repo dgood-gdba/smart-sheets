@@ -342,9 +342,9 @@ trait SheetEndpoints
         $results = $this->client()->request('post', $url, [
             'json' => $params
         ]);
-        dd($results);
         return $this->respond(200, 'Success.', [
-            'results' => $results->results,
+            'status' => $results->statusCode,
+            'message' => $results->reasonPhrase
         ]);
     }
 }
