@@ -347,7 +347,8 @@ trait SheetEndpoints
         $url = $this->url . self::SHEETS . "$sheet_id/rows";
         $results = $this->client()->request('post', $url, [
             'json' => $params
-        ]);
+        ])->getBody()->getContents();
+        dd($results);
         return $this->respond(200, 'Success.', [
             'status' => $results->statusCode,
             'message' => $results->reasonPhrase
