@@ -345,13 +345,12 @@ trait SheetEndpoints
             'cells' => $data
         ];
         $url = $this->url . self::SHEETS . "$sheet_id/rows";
-        $results = $this->client()->request('post', $url, [
+        $results = json_decode($this->client()->request('post', $url, [
             'json' => $params
-        ])->getBody()->getContents();
-        dd($results);
+        ])->getBody()->getContents());
         return $this->respond(200, 'Success.', [
-            'status' => $results->statusCode,
-            'message' => $results->reasonPhrase
+            'result' => $results->result,
+            'message' => $results->message
         ]);
     }
 }
