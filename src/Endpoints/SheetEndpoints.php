@@ -29,7 +29,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Copy has failed.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Deletes the sheet specified in the URL.
      *
@@ -47,7 +47,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Delete has failed.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets the sheet version without loading the entire sheet.
      *
@@ -67,7 +67,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets the sheet version without loading the entire sheet.
      *
@@ -84,7 +84,7 @@ trait SheetEndpoints
     public function getSheet($sheet_id, $include = 'objectValue', $columnIds = null, $filterId = null, $rowIds = null, $rowNumbers = null, Carbon $rowsModifiedSince = null): array
     {
         $url = $this->url . self::SHEETS . "$sheet_id?level=2&include=$include";
-
+        
         if ($columnIds) {
             $url .= "&columnIds=$columnIds";
         }
@@ -100,18 +100,21 @@ trait SheetEndpoints
         if ($rowsModifiedSince) {
             $url .= "&rowsModifiedSince=" . $rowsModifiedSince->toIso8601String();
         }
-
+        
         try {
             $results = json_decode($this->client()->get($url)->getBody()->getContents());
-            dd($results);
             return $this->respond(200, 'Success.', [
+                'name' => $results->name,
                 'version' => $results->version,
+                'rowCount' => $results->totalRowCount,
+                'columns' => $results->columns,
+                'rows' => $results->rows
             ]);
         } catch (\Exception $e) {
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets the sheet in the format specified, based on the sheet Id.
      *
@@ -132,7 +135,7 @@ trait SheetEndpoints
                 return $this->getSheetAsExcel($sheet_id);
         }
     }
-
+    
     /**
      * Gets the sheet in the format specified, based on the sheet Id.
      *
@@ -157,7 +160,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to download sheet as csv.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets the sheet in the format specified, based on the sheet Id.
      *
@@ -172,7 +175,7 @@ trait SheetEndpoints
         $url = $this->url . self::SHEETS . "$sheet_id?paperSize=$paper_size";
         try {
             $pdf = $this->client(additionHeaders: ['Accept' => 'application/pdf'])->get($url)->getBody()->getContents();
-
+            
             return $this->respond(200, 'Success.', [
                 'pdf' => $pdf,
             ]);
@@ -180,7 +183,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to download sheet as csv.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets the sheet in the format specified, based on the sheet Id.
      *
@@ -194,7 +197,7 @@ trait SheetEndpoints
         $url = $this->url . self::SHEETS . "$sheet_id";
         try {
             $pdf = $this->client(additionHeaders: ['Accept' => 'application/vnd.ms-excel'])->get($url)->getBody()->getContents();
-
+            
             return $this->respond(200, 'Success.', [
                 'excel' => $pdf,
             ]);
@@ -202,7 +205,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to download sheet as csv.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets a summarized list of all sheets owned by the members of the organization account.
      *
@@ -230,7 +233,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to access endpoint.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Gets a list of all sheets that the user has access to in alphabetical order by name. The list contains an
      * abbreviated Sheet object for each sheet.
@@ -256,7 +259,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to access endpoint.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Moves the specified sheet to a new location.
      *
@@ -269,7 +272,7 @@ trait SheetEndpoints
     {
         dd('NOT YET READY!!!');
     }
-
+    
     /**
      * Searches a sheet for the specified text.
      *
@@ -291,7 +294,7 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
     }
-
+    
     /**
      * Searches a sheet for the specified text.
      *
@@ -328,7 +331,6 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
     }
-
-
-
+    
+    
 }
