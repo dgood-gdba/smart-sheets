@@ -148,7 +148,7 @@ trait SheetEndpoints
     {
         $url = $this->url . self::SHEETS . "$sheet_id";
         try {
-            $csv = $this->client(additionHeaders: ['Accept' => 'text/csv'])->get($url)->getBody()->getContents();
+            $csv = $this->client('application/json', ['Accept' => 'text/csv'])->get($url)->getBody()->getContents();
             $sheet = str_getcsv($csv, "\n");
             foreach ($sheet as &$row) {
                 $row = str_getcsv($row);
