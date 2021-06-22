@@ -174,7 +174,7 @@ trait SheetEndpoints
         $paper_size = strtoupper($paper_size);
         $url = $this->url . self::SHEETS . "$sheet_id?paperSize=$paper_size";
         try {
-            $pdf = $this->client(additionHeaders: ['Accept' => 'application/pdf'])->get($url)->getBody()->getContents();
+            $pdf = $this->client('application/json', ['Accept' => 'text/csv'])->get($url)->getBody()->getContents();
             
             return $this->respond(200, 'Success.', [
                 'pdf' => $pdf,
