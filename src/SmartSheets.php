@@ -2,6 +2,7 @@
 
 namespace DgoodGdba\SmartSheets;
 
+use DgoodGdba\SmartSheets\Endpoints\AttachmentEndpoints;
 use DgoodGdba\SmartSheets\Endpoints\EventEndpoints;
 use DgoodGdba\SmartSheets\Endpoints\SheetEndpoints;
 use DgoodGdba\SmartSheets\Endpoints\UserEndpoints;
@@ -10,19 +11,20 @@ use Illuminate\Support\Str;
 
 final class SmartSheets
 {
+    use AttachmentEndpoints;
     use EventEndpoints;
     use SheetEndpoints;
     use UserEndpoints;
-
+    
     private string $bearer;
     private string $url;
-
+    
     #EndPoints
     const EVENTS = 'events/';
     const SEARCH = 'search/';
     const SHEETS = 'sheets/';
     const USERS = 'users/';
-
+    
     /**
      * Create a new class instance.
      */
@@ -31,7 +33,7 @@ final class SmartSheets
         $this->bearer = config('smart-sheets.api_token');
         $this->url = 'https://api.smartsheet.com/2.0/';
     }
-
+    
     /**
      * Allow manual setting of bearer token
      *
@@ -41,7 +43,7 @@ final class SmartSheets
     {
         $this->bearer = $api_token;
     }
-
+    
     /**
      * allow manual setting of the url
      *
@@ -51,7 +53,7 @@ final class SmartSheets
     {
         $this->url = $url;
     }
-
+    
     /**
      * Creates and returns a clean client
      *
@@ -65,16 +67,16 @@ final class SmartSheets
             'Authorization' => 'Bearer ' . $this->bearer,
             'Content-Type' => $contentType
         ];
-
+        
         foreach ($additionHeaders as $key => $value) {
             $headers[$key] = $value;
         }
-
+        
         return new \GuzzleHttp\Client([
             'headers' => $headers
         ]);
     }
-
+    
     /**
      * @param $status
      * @param $message
