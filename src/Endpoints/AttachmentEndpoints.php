@@ -4,7 +4,7 @@ namespace DgoodGdba\SmartSheets\Endpoints;
 
 trait AttachmentEndpoints
 {
-    private function clearRowsAttachments($ss, $sheet_id, $row_id)
+    private function clearRowsAttachments($sheet_id, $row_id)
     {
         $data = $this->getRowAttachments($sheet_id, $row_id);
         foreach ($data->data as $attachment) {
@@ -37,6 +37,24 @@ trait AttachmentEndpoints
         } catch (\Exception $e) {
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
+    }
+    
+    public function addRowAttachment($sheet_id, $row_id, $path)
+    {
+        $endpoint = "https://api.smartsheet.com/2.0/sheets/$sheet_id/rows/$row_id/attachments";
+        $result = $this->client()->request('post', $endpoint, [
+            'headers' =>
+                [
+                    'Authorization' => 'Bearer ' . config('smart-sheets.api_token'),
+                    'Content-Type' => '',
+                    'Content-Disposition' => 'attachment; filename="Acronyms.pdf"',
+                    'Content-Length' => filesize($path)
+                ],
+            'body' => file_get_contents($path)
+        ]);
+        $body = $result->getBody()->getContents();
+        
+        return json_decode($body);
     }
     
 }
