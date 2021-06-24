@@ -7,7 +7,7 @@ trait AttachmentEndpoints
     public function clearRowsAttachments($sheet_id, $row_id)
     {
         $data = $this->getRowAttachments($sheet_id, $row_id);
-        foreach ($data->data as $attachment) {
+        foreach ($data['data'] as $attachment) {
             $this->deleteAttachment($sheet_id, $attachment->id);
         }
     }
