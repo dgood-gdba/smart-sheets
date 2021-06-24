@@ -4,7 +4,7 @@ namespace DgoodGdba\SmartSheets\Endpoints;
 
 trait AttachmentEndpoints
 {
-    private function clearRowsAttachments($sheet_id, $row_id)
+    public function clearRowsAttachments($sheet_id, $row_id)
     {
         $data = $this->getRowAttachments($sheet_id, $row_id);
         foreach ($data->data as $attachment) {
