@@ -12,7 +12,7 @@ trait AttachmentEndpoints
         }
     }
     
-    public function getRow($sheet_id, $row_id)
+    public function getRowAttachments($sheet_id, $row_id)
     {
         $url = $this->url . self::SHEETS . "$sheet_id/rows/$row_id/attachments";
         try {
