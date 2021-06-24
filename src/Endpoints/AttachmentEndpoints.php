@@ -28,4 +28,15 @@ trait AttachmentEndpoints
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
     }
+    
+    public function deleteAttachment($sheet_id, $attachment_id)
+    {
+        $url = $this->url . self::SHEETS . "$sheet_id/attachments/$attachment_id";
+        try {
+            $this->client()->delete($url)->getBody()->getContents();
+        } catch (\Exception $e) {
+            return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
+        }
+    }
+    
 }
