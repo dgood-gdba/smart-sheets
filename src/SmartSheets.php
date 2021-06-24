@@ -4,6 +4,7 @@ namespace DgoodGdba\SmartSheets;
 
 use DgoodGdba\SmartSheets\Endpoints\AttachmentEndpoints;
 use DgoodGdba\SmartSheets\Endpoints\EventEndpoints;
+use DgoodGdba\SmartSheets\Endpoints\RowEndpoints;
 use DgoodGdba\SmartSheets\Endpoints\SheetEndpoints;
 use DgoodGdba\SmartSheets\Endpoints\UserEndpoints;
 use GuzzleHttp\Exception\GuzzleException;
@@ -14,6 +15,7 @@ final class SmartSheets
     use AttachmentEndpoints;
     use EventEndpoints;
     use SheetEndpoints;
+    use RowEndpoints;
     use UserEndpoints;
     
     private string $bearer;

@@ -331,26 +331,4 @@ trait SheetEndpoints
             return $this->respond(500, 'Unable to get sheet version.', ['exception' => $e->getMessage()]);
         }
     }
-    
-    /**
-     * @param string $sheet_id
-     * @param array $data
-     * @param bool $toTop
-     * @return array
-     */
-    public function addRow(string $sheet_id, array $data, bool $toTop = true): array
-    {
-        $params = [
-            'toTop' => $toTop,
-            'cells' => $data
-        ];
-        $url = $this->url . self::SHEETS . "$sheet_id/rows";
-        $results = json_decode($this->client()->request('post', $url, [
-            'json' => $params
-        ])->getBody()->getContents());
-        return $this->respond(200, 'Success.', [
-            'result' => $results->result,
-            'message' => $results->message
-        ]);
-    }
 }
