@@ -48,10 +48,10 @@ trait RowEndpoints
     
     public function deleteRow(string $sheet_id, int|array $rows)
     {
-        if( !is_array($rows) ){
+        if (!is_array($rows)) {
             $rows = [$rows];
         }
-        $url = $this->url . self::SHEETS . "$sheet_id/rows?ids=" . $rows . "&ignoreRowsNotFound=true";
+        $url = $this->url . self::SHEETS . "$sheet_id/rows?ids=" . implode(',', $rows) . "&ignoreRowsNotFound=true";
         $results = json_decode($this->client()->request('delete', $url)->getBody()->getContents());
         return $this->respond(200, 'Success.', [
             'result' => $results->result,
