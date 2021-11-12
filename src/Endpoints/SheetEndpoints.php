@@ -124,7 +124,7 @@ trait SheetEndpoints
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getSheetAs($sheet_id, string $type = 'pdf', string $paper_size = 'letter'): array
+    public function getSheetAs($sheet_id, string $type = 'pdf', string $paper_size = 'letter')
     {
         switch ($type) {
             case 'csv':
@@ -268,7 +268,7 @@ trait SheetEndpoints
      * @param string $destination_type
      * @return array
      */
-    public function moveSheet($sheet_id, $destination_id, $destination_type = 'folder'): array
+    public function moveSheet($sheet_id, $destination_id, $destination_type = 'folder')
     {
         dd('NOT YET READY!!!');
     }

@@ -46,7 +46,7 @@ trait RowEndpoints
         ]);
     }
     
-    public function deleteRow(string $sheet_id, int|array $rows)
+    public function deleteRow(string $sheet_id, $rows)
     {
         if (!is_array($rows)) {
             $rows = [$rows];
